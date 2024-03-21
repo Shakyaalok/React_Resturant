@@ -1,0 +1,31 @@
+.food-card {
+    width: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 0 auto;
+    position: absolute;
+    top: 70%;
+    left: 16%;
+}
+
+.food-item {
+    margin-bottom: 20px;
+    /* Spacing between food items */
+}
+
+.food-item h1 {
+    margin-top: 0;
+}
+
+.food-price {
+    color: red;
+}
+
+.food-item hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    /* Underline style */
+    margin: 10px 0;
+}
