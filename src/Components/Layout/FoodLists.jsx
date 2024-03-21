@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment,useState } from 'react'
 import classes from './FoodLists.module.css'
 
 const FoodLists = () => {
@@ -10,6 +10,13 @@ const FoodLists = () => {
     ]
 
 
+    const [quantity,setQuantity] = useState(0);
+
+    const quantitHadler = () =>{
+        setQuantity(quantity+1);
+    }
+
+
 const showFoodLists = () =>{
     return foodLists.map((itm,index)=>{
         return (
@@ -19,6 +26,9 @@ const showFoodLists = () =>{
             <h3>{itm.description}</h3>
             <h3 className={classes['food-price']}>{itm.price}</h3>
             </div>
+            <h5>{quantity}</h5>
+            <button onClick={quantitHadler}>Add</button>
+           
             {index !== foodLists.length - 1 && <hr />} {/* Add underline except for the last item */}
           </Fragment>
             
