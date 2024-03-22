@@ -19,16 +19,13 @@ function App() {
     setShowCart(false);
   }
 
-  const ButtonOfCartHandler = () =>{
-    setShowCart(true);
-  }
   
 
 
   return (
     <Fragment>
       {showCart && <Cart onClose={hideCartHandler}/>}
-      <Header onButtonOfCart={ButtonOfCartHandler} />
+      <Header onButtonOfCart={showCartHandler} />
       <Summary/>
       <FoodLists/>
     </Fragment>
