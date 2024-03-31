@@ -2,8 +2,7 @@ import Header from "./Components/Layout/Header";
 import Summary from "./Components/Layout/Summary";
 import FoodLists from './Components/Layout/FoodLists'
 import Cart from './Components/Cart/Cart'
-import cartProvider from "./store/cartProvider";
-import { Fragment } from "react";
+import CartProvider from "./store/cartProvider";
 import React,{useState} from "react";
 
 
@@ -24,12 +23,12 @@ function App() {
 
 
   return (
-    <cartProvider>
+    <CartProvider>
       {showCart && <Cart onClose={hideCartHandler}/>}
       <Header onButtonOfCart={showCartHandler} />
       <Summary/>
       <FoodLists/>
-    </cartProvider>
+    </CartProvider>
   );
 }
 
