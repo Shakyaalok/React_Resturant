@@ -9,15 +9,15 @@ const HeaderCartButton = (props) => {
    const cartCtx = useContext(cartContext);
    const [quantity, setQuantity] = useState(0)
    
-   useEffect(()=>{
-    let qnty=0;
-    cartCtx.items.map(itm => {
-     console.log("itm.quantity",itm.quantity)
-     qnty+=itm.quantity;
-    });
-    setQuantity(qnty)
-   },[cartCtx.items])
-
+  //  useEffect(()=>{
+  //   let qnty=0;
+  //   cartCtx.items.map(itm => {
+  //    console.log("itm.quantity",itm.quantity)
+  //    qnty+=itm.quantity;
+  //   });
+  //   setQuantity(qnty)
+  //  },[cartCtx.items])
+   console.log('cartCtx',cartCtx)
   
    
 

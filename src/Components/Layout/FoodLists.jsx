@@ -15,7 +15,6 @@ const FoodLists = () => {
 const addingItemToCartHanlder=(e)=>{
     const id = e.target.value
     const selectedItem = foodLists.find(item=>item.id===id);
-    console.log('selectedItem',selectedItem)
     cartCtx.addItem({
         id:selectedItem.id,
         name:selectedItem.name,

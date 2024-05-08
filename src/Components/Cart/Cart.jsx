@@ -1,14 +1,35 @@
-import React,{useContext} from 'react'
-import classes from './Cart.module.css'
-import Modal from '../UI/Modal';
-import cartContext from '../../store/cart-context';
+import React, { useContext } from "react";
+import classes from "./Cart.module.css";
+import Modal from "../UI/Modal";
+import cartContext from "../../store/cart-context";
 
 const Cart = (props) => {
-    const cartCtx = useContext(cartContext);
-  
-    const cartItems = <ul className={classes['cart-items']}>{cartCtx.items.map((itm)=><li>{itm.name}</li>)}</ul>;
-  
-    console.log('cartCtx',cartCtx)
+
+  const cartCtx = useContext(cartContext);
+  const hasItems = cartCtx.items.length>0
+  console.log('hasItems',hasItems)
+
+  const cartItems = (
+    <ul className={classes["cart-items"]}>
+      {cartCtx.items.map((itm) => (
+        <li className={classes["cart-item"]}>
+          <div>
+            <h2>{itm.name}</h2>
+            <div className={classes.summary}>
+              <span className={classes.price}>{itm.price}</span>
+              <span className={classes.amount}>x {itm.amount}</span>
+            </div>
+          </div>
+          <div className={classes.actions}>
+            <button onClick={props.onRemove}>−</button>
+            <button onClick={props.onAdd}>+</button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+
+  console.log("cartCtx", cartCtx);
 
   return (
     <Modal onClose={props.onClose}>
@@ -18,11 +39,14 @@ const Cart = (props) => {
         <span>{cartCtx.totalAmount}</span>
       </div>
       <div className={classes.actions}>
-       <button className={classes['button--alt']} onClick={props.onClose}>Close</button>
-       <button className={classes.button}>Order</button>
+        <button className={classes["button--alt"]} onClick={props.onClose}>
+          Close
+        </button>
+        {hasItems && <button className={classes.button}>Order</button>}
+   
       </div>
     </Modal>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
