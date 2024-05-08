@@ -1,20 +1,48 @@
-import React,{useState} from "react";
+import React,{useReducer} from "react";
 import cartContext from "./cart-context";
 
+
+
+const initialState = {
+  items:[],
+  totalAmount:0
+}
+
+const cartReducer = (state,action)=>{
+  if(action.type==='ADD'){
+    console.log('ADD',state )
+    const updatedItems = state.items.concat(action.item);
+    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+    console.log('updated',updatedTotalAmount)
+    return {
+      items:updatedItems,
+      totalAmount:updatedTotalAmount
+    }
+  }
+  return initialState;
+}
+
+
+
 const CartProvider = (props) => {
-  const [items,setUpdatedItems] = useState([]);
-    const addItemHandler = item=>{
-      // when we define this function(key in next and value in current) then we have to call it where our add button exists
-      
-      setUpdatedItems([...items,item])
-      // cartContect.items.push(item);
+
+  const [cartState,cartDispatcherAction] = useReducer(cartReducer,initialState)
+
+    const addItemHandler = (item)=>{
+      console.log('item',item)
+      cartDispatcherAction({type:'ADD',item:item})
     }
 
-    const removeItemHandler = id =>{}
+
+    const removeItemHandler = (id)=>{
+   cartDispatcherAction({type:'REMOVE',id:id})
+    }
+    
+   
 
     const cartContect = {
-        items:items,
-        totalAmount:0,
+        items:initialState.items,
+        totalAmount:cartState.totalAmount,
         addItem:addItemHandler,
         removeItem:removeItemHandler,
         // message:"this is new" // testing purpose

@@ -1,4 +1,4 @@
-import React, { useContext,useState,Fragment } from 'react'
+import React, { useContext,Fragment } from 'react'
 import cartContext from '../../store/cart-context'
 import classes from './FoodLists.module.css'
 
@@ -13,31 +13,15 @@ const FoodLists = () => {
     ]
 
 const addingItemToCartHanlder=(e)=>{
-    const itemId = e.target.value;
-    const selectedItem = foodLists.find(item => item.id === itemId);
-
-    // console.log(selectedItem.id,'si');
-    const itemInCartCtx = cartCtx.items.findIndex(item => item.id === itemId);
-    // console.log('incart',itemInCartCtx)
-    // if the added item is not present in cartCtx then i will simply just add it otherwise do some modifications
-    
-    if(!itemInCartCtx){
-        // exists
-       const items = [...cartCtx.items];
-       items[itemInCartCtx].quantity++;
-       items[itemInCartCtx].totalAmount += selectedItem.price;
-       cartCtx.addItem(items) 
-    }else{
-        // not exists
-        let items = {
-            ...selectedItem,
-            quantity:1,
-            totalAmount:selectedItem.price
-        }
-        cartCtx.addItem(items);
-    }
-    
-
+    const id = e.target.value
+    const selectedItem = foodLists.find(item=>item.id===id);
+    console.log('selectedItem',selectedItem)
+    cartCtx.addItem({
+        id:selectedItem.id,
+        name:selectedItem.name,
+        price:selectedItem.price,
+        amount:1
+    }); 
 }
 
 

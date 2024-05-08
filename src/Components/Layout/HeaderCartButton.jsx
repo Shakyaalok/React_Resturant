@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext, useEffect, useState} from "react";
 import classes from './HeaderCartButton.module.css'
 import CartIcon from "../Cart/CartIcon";
 import cartContext from "../../store/cart-context";
@@ -7,12 +7,18 @@ import cartContext from "../../store/cart-context";
 
 const HeaderCartButton = (props) => {
    const cartCtx = useContext(cartContext);
+   const [quantity, setQuantity] = useState(0)
    
-   let calculateQuantity = 0;
-   cartCtx.items.forEach(itm => {
-     console.log(itm)
-     calculateQuantity += itm.quantity;
-   });
+   useEffect(()=>{
+    let qnty=0;
+    cartCtx.items.map(itm => {
+     console.log("itm.quantity",itm.quantity)
+     qnty+=itm.quantity;
+    });
+    setQuantity(qnty)
+   },[cartCtx.items])
+
+  
    
 
 
@@ -23,9 +29,8 @@ const HeaderCartButton = (props) => {
       </span>
       <span>Your Cart</span>
       {/* testing purpose */}
-      <span>{cartCtx.message}</span> 
-      <span className={classes.badge}>{calculateQuantity}</span>
-      {/* <span className={classes.badge}>{numberofCartItems}</span> */}
+      {/* <span>{cartCtx.message}</span>  */}
+      <span className={classes.badge}>{quantity}</span>
     </button>
   );
 };
