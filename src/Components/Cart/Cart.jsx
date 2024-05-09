@@ -15,6 +15,12 @@ const Cart = (props) => {
 
   }
 
+  const minusCartHandler = (id) =>{
+    console.log('iyemId',id);
+    cartCtx.removeItem(id)
+
+  }
+
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((itm) => (
@@ -27,7 +33,7 @@ const Cart = (props) => {
             </div>
           </div>
           <div className={classes.actions}>
-            <button onClick={props.onRemove}>−</button>
+            <button onClick={()=>minusCartHandler(itm.id)}>−</button>
             <button onClick={()=>plusCartHandler(itm)}>+</button>
           </div>
         </li>
